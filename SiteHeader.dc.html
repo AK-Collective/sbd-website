@@ -24,6 +24,17 @@
     [style*="position: absolute"][style*="border-radius:50%"]{display:none !important}
     [style*="white-space:nowrap"][style*="display:block"],
     [style*="white-space: nowrap"][style*="display: block"]{white-space:normal !important}
+    /* Let text blocks inside flex rows shrink/wrap instead of overflowing
+       (the default min-width:auto flex trap). Scoped to div children so
+       fixed-size icon spans are untouched. */
+    [style*="display:flex"] > div, [style*="display: flex"] > div{min-width:0}
+    /* Break long words rather than letting them spill past narrow columns
+       on very small screens (last-resort safety). */
+    h1,h2,h3,h4,h5,p,span,a,div,li{overflow-wrap:break-word}
+    /* Trim oversized desktop card/CTA padding on phones so content (esp.
+       headings beside an icon) has room to wrap naturally. */
+    [style*="padding:44px"], [style*="padding: 44px"]{padding:26px 22px !important}
+    [style*="padding:62px 56px"], [style*="padding: 62px 56px"]{padding:40px 24px !important}
   }
 </style>
 </helmet>
