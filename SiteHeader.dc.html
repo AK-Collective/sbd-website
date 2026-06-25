@@ -102,9 +102,12 @@
               <textarea value="{{ message }}" onChange="{{ onMessage }}" rows="3" placeholder="Share your vision, challenge, or question…" style="width:100%;box-sizing:border-box;font-family:'Public Sans',sans-serif;font-size:15px;color:#333;line-height:1.55;padding:11px 13px;border:1px solid #D2D8DE;border-radius:10px;outline:none;resize:vertical;transition:border-color .2s,box-shadow .2s" style-focus="border-color:#1E6FBF;box-shadow:0 0 0 3px rgba(30,111,191,0.20)"></textarea>
             </label>
             <button type="submit" style="margin-top:20px;width:100%;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:16px;color:#fff;background:linear-gradient(135deg,#1E6FBF,#3DAE2B);border:none;border-radius:12px;padding:14px 24px;cursor:pointer;box-shadow:0 8px 20px rgba(30,111,191,0.22);transition:filter .2s,transform .12s" style-hover="filter:brightness(.96)" style-active="transform:translateY(1px)">
-              Send message
+              {{ submitLabel }}
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </button>
+            <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}">
+              <p style="font-family:'Public Sans',sans-serif;font-size:13px;line-height:1.5;color:#C0392B;text-align:center;margin:12px 0 0">Something went wrong sending your message. Please email us directly at <a href="mailto:engage@strategiesbydesigngroup.com" style="color:#C0392B;text-decoration:none;font-weight:600">engage@strategiesbydesigngroup.com</a>.</p>
+            </sc-if>
             <p style="font-family:'Public Sans',sans-serif;font-size:12.5px;color:#7E8893;text-align:center;margin:14px 0 0">Or email us at <a href="mailto:engage@strategiesbydesigngroup.com" style="color:#1E6FBF;text-decoration:none;font-weight:600">engage@strategiesbydesigngroup.com</a></p>
           </form>
         </sc-if>
@@ -114,11 +117,17 @@
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:80},&quot;active&quot;:{&quot;editor&quot;:null,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;surface&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;glass&quot;,&quot;options&quot;:[&quot;glass&quot;,&quot;solid&quot;,&quot;navy&quot;],&quot;tsType&quot;:&quot;'glass'|'solid'|'navy'&quot;},&quot;ctaStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;solid&quot;,&quot;options&quot;:[&quot;solid&quot;,&quot;gradient&quot;,&quot;outline&quot;],&quot;tsType&quot;:&quot;'solid'|'gradient'|'outline'&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;blue&quot;,&quot;options&quot;:[&quot;blue&quot;,&quot;green&quot;,&quot;gold&quot;,&quot;teal&quot;],&quot;tsType&quot;:&quot;'blue'|'green'|'gold'|'teal'&quot;}}">
+// ── Contact form delivery ─────────────────────────────────────────────
+// Paste the GoHighLevel inbound-webhook URL between the quotes below to
+// make the contact form deliver leads into the CRM. Until it's set, the
+// form simply shows a thank-you (no lead is transmitted).
+const CONTACT_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/FZWydZXZbAklZOPzt8NE/webhook-trigger/d1d22512-9656-46b0-99cb-a03be1c92269';
+
 class Component extends DCLogic {
-  state = { open:false, sent:false, mobileOpen:false, name:'', org:'', role:'', email:'', message:'' };
+  state = { open:false, sent:false, sending:false, error:false, mobileOpen:false, name:'', org:'', role:'', email:'', message:'' };
 
   componentDidMount() {
-    this._open = () => this.setState({ open:true, sent:false });
+    this._open = () => this.setState({ open:true, sent:false, sending:false, error:false });
     window.addEventListener('sbd:open-contact', this._open);
     this._key = (e) => { if (e.key === 'Escape') this.setState({ open:false }); };
     window.addEventListener('keydown', this._key);
@@ -204,7 +213,7 @@ class Component extends DCLogic {
       showForm: !this.state.sent,
       mobileOpen: this.state.mobileOpen,
       name: this.state.name, org: this.state.org, role: this.state.role, email: this.state.email, message: this.state.message,
-      openContact: () => this.setState({ open:true, sent:false, mobileOpen:false }),
+      openContact: () => this.setState({ open:true, sent:false, sending:false, error:false, mobileOpen:false }),
       closeContact: () => this.setState({ open:false }),
       toggleMobile: () => this.setState(s => ({ mobileOpen: !s.mobileOpen })),
       stop: (e) => e.stopPropagation(),
@@ -213,7 +222,36 @@ class Component extends DCLogic {
       onRole: (e) => this.setState({ role:e.target.value }),
       onEmail: (e) => this.setState({ email:e.target.value }),
       onMessage: (e) => this.setState({ message:e.target.value }),
-      submit: (e) => { e.preventDefault(); this.setState({ sent:true }); },
+      submitLabel: this.state.sending ? 'Sending…' : 'Send message',
+      error: this.state.error,
+      submit: (e) => {
+        e.preventDefault();
+        if (this.state.sending) return;
+        const payload = {
+          name: this.state.name,
+          organization: this.state.org,
+          role: this.state.role,
+          email: this.state.email,
+          message: this.state.message,
+          source: 'website-contact-form',
+          page: (typeof location !== 'undefined') ? location.href : '',
+        };
+        // Not yet configured → preserve the original thank-you behavior.
+        if (!CONTACT_WEBHOOK) { this.setState({ sent:true }); return; }
+        this.setState({ sending:true, error:false });
+        // GHL's hook endpoint sends CORS headers, so a normal request works
+        // and we can read the real result instead of guessing.
+        fetch(CONTACT_WEBHOOK, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        }).then((r) => {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          this.setState({ sent:true, sending:false });
+        }).catch(() => {
+          this.setState({ sending:false, error:true });
+        });
+      },
     };
   }
 }
