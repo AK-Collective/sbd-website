@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:#fff}
+  *{box-sizing:border-box}
+  @keyframes sbdFade{from{opacity:0}to{opacity:1}}
+  @keyframes sbdRise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</helmet>
+
+<div style="font-family:'Public Sans',sans-serif;color:#333;background:#fff">
+  <dc-import name="SiteHeader" active="" hint-size="100%,76px"></dc-import>
+
+  <!-- HERO -->
+  <section style="position:relative;overflow:hidden;background:linear-gradient(180deg,#F8FAFB 0%,#fff 70%)">
+    <div style="position:absolute;top:-180px;right:-140px;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle at 32% 32%,rgba(61,174,43,0.16),rgba(30,111,191,0.12) 52%,transparent 70%);pointer-events:none"></div>
+    <div style="max-width:1200px;margin:0 auto;padding:96px 32px 92px;position:relative;display:grid;grid-template-columns:1.08fr 0.92fr;gap:56px;align-items:center">
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:10px;font-family:'Libre Franklin',sans-serif;font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#1E6FBF">
+          <span style="width:24px;height:1.5px;background:#1E6FBF"></span>Human insight · Augmented intelligence
+        </div>
+        <h1 style="font-family:'Libre Franklin',sans-serif;font-weight:800;font-size:clamp(40px,5.2vw,62px);line-height:1.03;letter-spacing:-0.025em;color:#1E3A5F;margin:22px 0 0">From human insight to <span style="background:linear-gradient(120deg,#1E6FBF,#3DAE2B);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">real transformation</span>.</h1>
+        <p style="font-size:19px;line-height:1.62;color:#5A6470;margin:24px 0 0;max-width:540px">Strategies By Design is a transformation studio that blends human insight, design strategy, and technical expertise — creating practical, people-first AI experiences that elevate performance, sharpen decisions, and inspire trust.</p>
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:34px 0 0">
+          <button onClick="{{ openContact }}" style="display:inline-flex;align-items:center;gap:10px;font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:16px;color:#fff;background:#1E6FBF;border:none;border-radius:12px;padding:15px 26px;cursor:pointer;box-shadow:0 10px 24px rgba(30,111,191,0.22);transition:filter .2s,transform .12s" style-hover="filter:brightness(.94)" style-active="transform:translateY(1px)">
+            Start a strategy conversation
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+          <a href="Certifications.dc.html" style="display:inline-flex;align-items:center;gap:9px;font-family:'Libre Franklin',sans-serif;font-weight:600;font-size:16px;color:#1E3A5F;background:#fff;border:1px solid #D2D8DE;border-radius:12px;padding:15px 24px;text-decoration:none;transition:background .2s,border-color .2s" style-hover="background:#F2F4F6;border-color:#AEB7C0">Explore certifications</a>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:38px">
+          <sc-for list="{{ focus }}" as="f" hint-placeholder-count="3">
+            <span style="display:inline-flex;align-items:center;gap:8px;font-family:'Libre Franklin',sans-serif;font-weight:600;font-size:13.5px;color:#1E3A5F;background:#fff;border:1px solid #E4E8EC;border-radius:999px;padding:9px 15px;box-shadow:0 1px 2px rgba(30,58,95,0.05)">
+              <span style="width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,#1E6FBF,#3DAE2B)"></span>{{ f }}
+            </span>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:center">
+        <div style="position:relative">
+          <div style="position:absolute;inset:-36px;background:linear-gradient(135deg,#1E6FBF,#3DAE2B);filter:blur(64px);opacity:0.22;border-radius:50%"></div>
+          <img src="assets/logo-mark.png" alt="Strategies by Design sphere" style="position:relative;width:340px;max-width:42vw;height:auto;filter:drop-shadow(0 28px 56px rgba(30,58,95,0.28))">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCELERATE BANNER -->
+  <section style="background:#1E3A5F;position:relative;overflow:hidden">
+    <div style="position:absolute;bottom:-160px;left:-80px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(61,174,43,0.22),transparent 70%);pointer-events:none"></div>
+    <div style="position:absolute;top:-160px;right:-60px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(30,111,191,0.28),transparent 70%);pointer-events:none"></div>
+    <div style="max-width:1200px;margin:0 auto;padding:60px 32px;position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px">
+      <h2 style="font-family:'Libre Franklin',sans-serif;font-weight:800;font-size:clamp(30px,4vw,44px);letter-spacing:-0.02em;color:#fff;margin:0;line-height:1.05">Don't just automate. <span style="color:#72C75E">Accelerate.</span></h2>
+      <p style="font-size:19px;line-height:1.55;color:#C9D4E1;margin:0;max-width:420px">We turn AI into a driver of real business growth — not just another tool to manage.</p>
+    </div>
+  </section>
+
+  <!-- HOW WE WORK -->
+  <section style="max-width:1200px;margin:0 auto;padding:96px 32px 20px">
+    <div style="max-width:720px">
+      <div style="display:inline-flex;align-items:center;gap:10px;font-family:'Libre Franklin',sans-serif;font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#3DAE2B"><span style="width:24px;height:1.5px;background:#3DAE2B"></span>How we work</div>
+      <h2 style="font-family:'Libre Franklin',sans-serif;font-weight:800;font-size:clamp(30px,4vw,42px);letter-spacing:-0.02em;color:#1E3A5F;margin:16px 0 0;line-height:1.08">Human Intelligence + Augmented Intelligence</h2>
+      <p style="font-size:18px;line-height:1.62;color:#5A6470;margin:18px 0 0">We don't just implement AI. We unite your people with augmented intelligence to redesign how your business creates value — practical, measurable, and built to last.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:48px">
+      <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="3">
+        <div style="background:#fff;border:1px solid #E4E8EC;border-top:3px solid;border-top-color:{{ p.accent }};border-radius:14px;padding:30px 28px;box-shadow:0 1px 2px rgba(30,58,95,0.06);transition:transform .2s,box-shadow .2s" style-hover="transform:translateY(-4px);box-shadow:0 14px 30px rgba(30,58,95,0.13)">
+          <span style="display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:12px;background:{{ p.tint }};color:{{ p.accent }}">
+            <span style="display:flex" data-icon="{{ p.key }}"></span>
+          </span>
+          <h3 style="font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:21px;color:#1E3A5F;margin:22px 0 10px;letter-spacing:-0.01em">{{ p.title }}</h3>
+          <p style="font-size:15.5px;line-height:1.62;color:#5A6470;margin:0">{{ p.desc }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- DESIGNED FOR PEOPLE -->
+  <section style="max-width:1200px;margin:0 auto;padding:88px 32px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center">
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:10px;font-family:'Libre Franklin',sans-serif;font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#1E6FBF"><span style="width:24px;height:1.5px;background:#1E6FBF"></span>Our team</div>
+        <h2 style="font-family:'Libre Franklin',sans-serif;font-weight:800;font-size:clamp(28px,3.6vw,40px);letter-spacing:-0.02em;color:#1E3A5F;margin:16px 0 0;line-height:1.1">AI transformation, designed for people</h2>
+        <p style="font-size:17.5px;line-height:1.66;color:#5A6470;margin:20px 0 0">Our team is a collective of AI strategists and practitioners dedicated to turning AI into a force for meaningful, sustainable change. With backgrounds in organizational transformation, AI, leadership development, compliance, and data science, we bring depth and practicality to every engagement.</p>
+        <a href="About.dc.html" style="display:inline-flex;align-items:center;gap:9px;font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:16px;color:#1E6FBF;text-decoration:none;margin-top:26px" style-hover="color:#154A80">
+          Learn more about us
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      </div>
+      <div style="position:relative">
+        <div style="position:absolute;inset:-18px -18px auto auto;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(61,174,43,0.16),transparent 70%);pointer-events:none"></div>
+        <img src="uploads/home-team.webp" alt="Strategies by Design team collaborating" style="width:100%;height:380px;display:block;position:relative;object-fit:cover;object-position:60% center;border-radius:18px">
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATION TEASER -->
+  <section style="background:#F2F4F6">
+    <div style="max-width:1200px;margin:0 auto;padding:88px 32px">
+      <div style="position:relative;overflow:hidden;border-radius:20px;background:linear-gradient(160deg,#1E3A5F,#13263F);padding:56px 52px;display:grid;grid-template-columns:1.2fr 0.8fr;gap:40px;align-items:center">
+        <div style="position:absolute;top:-120px;right:-60px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(200,169,81,0.30),transparent 70%);pointer-events:none"></div>
+        <div style="position:relative">
+          <div style="display:inline-flex;align-items:center;gap:10px;font-family:'Libre Franklin',sans-serif;font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#C8A951"><span style="width:24px;height:1.5px;background:#C8A951"></span>Certification</div>
+          <h2 style="font-family:'Libre Franklin',sans-serif;font-weight:800;font-size:clamp(28px,3.4vw,38px);letter-spacing:-0.02em;color:#fff;margin:16px 0 0;line-height:1.12">Turn your AI curiosity into certified confidence</h2>
+          <p style="font-size:17px;line-height:1.62;color:#C9D4E1;margin:18px 0 28px;max-width:520px">Build practical, people-first AI skills and earn credentials that leaders trust — for practitioners ready to lead AI transformation responsibly and effectively.</p>
+          <a href="Certifications.dc.html" style="display:inline-flex;align-items:center;gap:10px;font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:16px;color:#1E3A5F;background:#fff;border:none;border-radius:12px;padding:14px 24px;text-decoration:none;transition:filter .2s" style-hover="filter:brightness(.95)">
+            View certification pathways
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </div>
+        <div style="position:relative;display:flex;flex-direction:column;gap:12px">
+          <sc-for list="{{ certs }}" as="c" hint-placeholder-count="3">
+            <div style="display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.06);border:1px solid #36567B;border-radius:12px;padding:14px 16px">
+              <span style="flex:none;width:34px;height:34px;border-radius:9px;display:inline-flex;align-items:center;justify-content:center;background:rgba(200,169,81,0.18);color:#DEC684">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M8.21 13.89 7 23l5-3 5 3-1.21-9.12"></path></svg>
+              </span>
+              <span style="font-family:'Libre Franklin',sans-serif;font-weight:600;font-size:14.5px;color:#fff;line-height:1.3">{{ c }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT CTA -->
+  <section style="max-width:1200px;margin:0 auto;padding:92px 32px">
+    <div style="text-align:center;max-width:760px;margin:0 auto">
+      <div style="display:inline-flex;align-items:center;gap:10px;font-family:'Libre Franklin',sans-serif;font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#3DAE2B;justify-content:center"><span style="width:24px;height:1.5px;background:#3DAE2B"></span>Let's talk</div>
+      <h2 style="font-family:'Libre Franklin',sans-serif;font-weight:800;font-size:clamp(30px,4vw,44px);letter-spacing:-0.02em;color:#1E3A5F;margin:16px 0 0;line-height:1.08">Ready to design what's next with AI?</h2>
+      <p style="font-size:18px;line-height:1.64;color:#5A6470;margin:20px auto 0;max-width:640px">Whether you're exploring your first AI initiative or scaling agentic AI across the enterprise, we'll meet you where you are and help you move forward with clarity and confidence.</p>
+      <blockquote style="margin:34px auto 0;max-width:560px;font-family:'Cinzel',serif;font-weight:500;font-size:21px;line-height:1.5;color:#1E3A5F">"What are you hoping AI can help you achieve?"</blockquote>
+      <div style="margin-top:30px">
+        <button onClick="{{ openContact }}" style="display:inline-flex;align-items:center;gap:10px;font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:17px;color:#fff;background:linear-gradient(135deg,#1E6FBF,#3DAE2B);border:none;border-radius:14px;padding:16px 30px;cursor:pointer;box-shadow:0 12px 28px rgba(30,111,191,0.24);transition:filter .2s,transform .12s" style-hover="filter:brightness(.96)" style-active="transform:translateY(1px)">
+          Start a strategy conversation
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="SiteFooter" hint-size="100%,360px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  componentDidMount() { this._paintIcons(); }
+  componentDidUpdate() { this._paintIcons(); }
+  _paintIcons() {
+    const ic = {
+      value: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>',
+      work: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>',
+      org: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>',
+    };
+    document.querySelectorAll('[data-icon]').forEach(el => {
+      const k = el.getAttribute('data-icon');
+      if (ic[k] && el.getAttribute('data-painted') !== k) { el.innerHTML = ic[k]; el.setAttribute('data-painted', k); }
+    });
+  }
+  renderVals() {
+    return {
+      openContact: () => window.dispatchEvent(new CustomEvent('sbd:open-contact')),
+      focus: ['Value creation', 'Work redesign', 'Organizational transformation'],
+      pillars: [
+        { key:'value', accent:'#1E6FBF', tint:'rgba(30,111,191,0.12)', title:'Value Creation', desc:'Identifying high-impact opportunities across business models and services — where AI can move the needle on real outcomes.' },
+        { key:'work', accent:'#3DAE2B', tint:'rgba(61,174,43,0.13)', title:'Work Redesign', desc:'Reconfiguring workflows to integrate AI effectively alongside human expertise, not in place of it.' },
+        { key:'org', accent:'#C8A951', tint:'rgba(200,169,81,0.16)', title:'Organizational Transformation', desc:'Aligning culture, talent, and systems to sustain change long after the pilot ends.' },
+      ],
+      certs: ['Certified Agentic Transformation Leader', 'Certified AI Ethics Professional', 'Certified AI Change Agent'],
+    };
+  }
+}
+</script>
+</body>
+</html>

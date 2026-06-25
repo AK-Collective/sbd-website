@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:#fff}
+  *{box-sizing:border-box}
+  @keyframes sbdFade{from{opacity:0}to{opacity:1}}
+</style>
+</helmet>
+
+<div style="font-family:'Public Sans',sans-serif;color:#333;background:#fff">
+  <dc-import name="SiteHeader" active="certifications" hint-size="100%,76px"></dc-import>
+
+  <!-- HERO -->
+  <section style="position:relative;overflow:hidden;background:linear-gradient(180deg,#F8FAFB 0%,#fff 80%)">
+    <div style="position:absolute;top:-150px;right:-110px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle at 35% 35%,rgba(200,169,81,0.20),rgba(30,58,95,0.06) 55%,transparent 72%);pointer-events:none"></div>
+    <div style="max-width:1200px;margin:0 auto;padding:90px 32px 60px;position:relative">
+      <div style="max-width:760px">
+        <div style="display:inline-flex;align-items:center;gap:10px;font-family:'Libre Franklin',sans-serif;font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#9C8035"><span style="width:24px;height:1.5px;background:#C8A951"></span>Certification pathways</div>
+        <h1 style="font-family:'Libre Franklin',sans-serif;font-weight:800;font-size:clamp(34px,4.6vw,54px);line-height:1.06;letter-spacing:-0.025em;color:#1E3A5F;margin:20px 0 0">Turn your AI curiosity into certified confidence</h1>
+        <p style="font-size:18.5px;line-height:1.64;color:#5A6470;margin:22px 0 0;max-width:620px">Build practical, people-first AI skills and earn credentials that leaders trust. Our certification programs are for practitioners who want to lead AI transformation responsibly and effectively.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:48px">
+        <sc-for list="{{ summary }}" as="s" hint-placeholder-count="3">
+          <a href="{{ s.href }}" style="display:block;text-decoration:none;background:#fff;border:1px solid #E4E8EC;border-top:3px solid #C8A951;border-radius:14px;padding:28px 26px;box-shadow:0 1px 2px rgba(30,58,95,0.06);transition:transform .2s,box-shadow .2s" style-hover="transform:translateY(-4px);box-shadow:0 16px 32px rgba(30,58,95,0.13)">
+            <span style="display:inline-flex;align-items:center;justify-content:center;width:50px;height:50px;border-radius:12px;background:rgba(200,169,81,0.16);color:#9C8035">
+              <span style="display:flex" data-icon="{{ s.key }}"></span>
+            </span>
+            <h3 style="font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:19px;color:#1E3A5F;margin:20px 0 8px;line-height:1.25">{{ s.title }}</h3>
+            <p style="font-size:15px;line-height:1.55;color:#5A6470;margin:0">{{ s.tagline }}</p>
+            <span style="display:inline-flex;align-items:center;gap:7px;font-family:'Libre Franklin',sans-serif;font-weight:600;font-size:14px;color:#9C8035;margin-top:16px">Explore<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAILED CERTS -->
+  <section style="background:#F2F4F6">
+    <div style="max-width:1080px;margin:0 auto;padding:84px 32px;display:flex;flex-direction:column;gap:40px">
+      <sc-for list="{{ certs }}" as="cert" hint-placeholder-count="3">
+        <div id="{{ cert.id }}" style="background:#fff;border:1px solid #E4E8EC;border-top:4px solid #C8A951;border-radius:18px;padding:44px 44px;box-shadow:0 6px 24px rgba(30,58,95,0.07);scroll-margin-top:96px">
+          <div style="display:flex;gap:18px;align-items:flex-start">
+            <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:58px;height:58px;border-radius:14px;background:rgba(200,169,81,0.16);color:#9C8035">
+              <span style="display:flex" data-icon="{{ cert.key }}"></span>
+            </span>
+            <div>
+              <h2 style="font-family:'Libre Franklin',sans-serif;font-weight:800;font-size:clamp(24px,2.8vw,32px);letter-spacing:-0.02em;color:#1E3A5F;margin:2px 0 6px;line-height:1.12">{{ cert.title }}</h2>
+              <div style="font-family:'Libre Franklin',sans-serif;font-weight:600;font-size:16.5px;color:#9C8035">{{ cert.subtitle }}</div>
+            </div>
+          </div>
+          <p style="font-size:16.5px;line-height:1.66;color:#5A6470;margin:24px 0 0;max-width:780px">{{ cert.intro }}</p>
+          <div style="font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#1E3A5F;margin:32px 0 18px">{{ cert.learnLabel }}</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px">
+            <sc-for list="{{ cert.items }}" as="it" hint-placeholder-count="5">
+              <div style="display:flex;gap:14px;align-items:flex-start">
+                <span style="flex:none;width:30px;height:30px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:#1E3A5F;color:#fff;font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:13px">{{ it.n }}</span>
+                <div>
+                  <div style="font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:16px;color:#1E3A5F;margin-bottom:3px">{{ it.title }}</div>
+                  <div style="font-size:14.5px;line-height:1.55;color:#5A6470">{{ it.desc }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;margin-top:30px;background:linear-gradient(135deg,#FBF7EA,#F2F4F6);border:1px solid #DEC684;border-radius:14px;padding:22px 24px">
+            <span style="flex:none;width:34px;height:34px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:#C8A951;color:#fff">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </span>
+            <div>
+              <div style="font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#9C8035;margin-bottom:5px">Your outcome</div>
+              <p style="font-size:16px;line-height:1.6;color:#1E3A5F;margin:0;font-weight:500">{{ cert.outcome }}</p>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="max-width:1200px;margin:0 auto;padding:92px 32px">
+    <div style="position:relative;overflow:hidden;border-radius:20px;background:linear-gradient(160deg,#1E3A5F,#13263F);padding:62px 56px;text-align:center">
+      <div style="position:absolute;top:-120px;right:-50px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(200,169,81,0.30),transparent 70%);pointer-events:none"></div>
+      <div style="position:relative;max-width:680px;margin:0 auto">
+        <h2 style="font-family:'Libre Franklin',sans-serif;font-weight:800;font-size:clamp(28px,3.6vw,40px);letter-spacing:-0.02em;color:#fff;margin:0;line-height:1.12">Ready to lead responsible AI transformation?</h2>
+        <p style="font-size:17.5px;line-height:1.64;color:#C9D4E1;margin:18px auto 32px;max-width:540px">Tell us where you are on your journey — we'll help you choose the pathway that fits.</p>
+        <button onClick="{{ openContact }}" style="display:inline-flex;align-items:center;gap:10px;font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:16px;color:#1E3A5F;background:#fff;border:none;border-radius:12px;padding:15px 28px;cursor:pointer;transition:filter .2s,transform .12s" style-hover="filter:brightness(.95)" style-active="transform:translateY(1px)">
+          Become certified
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="SiteFooter" hint-size="100%,360px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  componentDidMount() { this._paintIcons(); }
+  componentDidUpdate() { this._paintIcons(); }
+  _paintIcons() {
+    const ic = {
+      leader: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>',
+      ethics: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>',
+      change: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>',
+    };
+    document.querySelectorAll('[data-icon]').forEach(el => {
+      const k = el.getAttribute('data-icon');
+      if (ic[k] && el.getAttribute('data-painted') !== k) { el.innerHTML = ic[k]; el.setAttribute('data-painted', k); }
+    });
+  }
+  renderVals() {
+    return {
+      openContact: () => window.dispatchEvent(new CustomEvent('sbd:open-contact')),
+      summary: [
+        { key:'leader', title:'Certified Agentic Transformation Leader', tagline:'Lead AI transformation from strategy to execution.', href:'#leader' },
+        { key:'ethics', title:'Certified AI Ethics Professional', tagline:'Make AI responsible, trustworthy, and scalable.', href:'#ethics' },
+        { key:'change', title:'Certified AI Change Agent', tagline:'Drive adoption, alignment, and real behavior change.', href:'#change' },
+      ],
+      certs: [
+        {
+          id:'leader', key:'leader', title:'Certified Agentic Transformation Leader', subtitle:'Lead AI transformation from strategy to execution',
+          intro:'A practitioner-level certification designed for leaders driving agentic AI initiatives inside organizations. Move beyond exploration and lead real transformation efforts — from opportunity identification to deployed solutions.',
+          learnLabel:'Learn how to',
+          items:[
+            { n:'1', title:'Identify Opportunities', desc:'Identify and map high-impact agentic opportunities within your organization.' },
+            { n:'2', title:'Design Systems', desc:'Design multi-agent workflows and systems that deliver measurable results.' },
+            { n:'3', title:'Align Stakeholders', desc:'Align stakeholders across business and technical teams for unified execution.' },
+            { n:'4', title:'Lead Transformation', desc:'Lead end-to-end AI-driven transformation initiatives with confidence.' },
+            { n:'5', title:'Navigate Ethics', desc:'Navigate implementation with practical and ethical considerations at every step.' },
+          ],
+          outcome:'You\u2019ll be able to move beyond AI exploration and lead real transformation efforts — from opportunity identification to deployed solutions.'
+        },
+        {
+          id:'ethics', key:'ethics', title:'Certified AI Ethics Professional', subtitle:'Make AI responsible, trustworthy, and scalable',
+          intro:'As AI adoption accelerates, organizations need leaders who can ensure systems are ethical, transparent, and accountable. This certification equips you to build trust into every initiative.',
+          learnLabel:'This certification equips you to',
+          items:[
+            { n:'1', title:'Embed Ethical Frameworks', desc:'Embed ethical frameworks into AI and agentic systems.' },
+            { n:'2', title:'Identify & Mitigate Risk', desc:'Identify and mitigate bias, risk, and unintended consequences.' },
+            { n:'3', title:'Design for Trust', desc:'Design for transparency, explainability, and trust.' },
+            { n:'4', title:'Regulatory Alignment', desc:'Align AI initiatives with organizational and regulatory expectations.' },
+            { n:'5', title:'Scale Responsibly', desc:'Guide teams in building responsible AI practices at scale.' },
+          ],
+          outcome:'You\u2019ll become the person who ensures AI initiatives are not just powerful — but trusted, compliant, and sustainable.'
+        },
+        {
+          id:'change', key:'change', title:'Certified AI Change Agent', subtitle:'Drive adoption, alignment, and real behavior change',
+          intro:'AI transformation fails when people don\u2019t adopt it. This certification focuses on the human side of AI implementation — turning initiatives into lasting change.',
+          learnLabel:'You\u2019ll learn how to',
+          items:[
+            { n:'1', title:'Lead Organizational Change', desc:'Lead organizational change in AI initiatives with clarity, empathy, and purpose.' },
+            { n:'2', title:'Drive Alignment', desc:'Drive alignment across leadership, teams, and stakeholders at every level.' },
+            { n:'3', title:'Overcome Resistance', desc:'Overcome resistance and build momentum for adoption across the organization.' },
+            { n:'4', title:'Translate Strategy', desc:'Translate AI strategy into day-to-day execution that teams can actually follow.' },
+            { n:'5', title:'Embed AI in Workflows', desc:'Embed AI into workflows so it actually gets used — not just piloted and shelved.' },
+          ],
+          outcome:'You\u2019ll be able to turn AI initiatives into real, sustained change inside organizations — not just pilots or experiments.'
+        },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

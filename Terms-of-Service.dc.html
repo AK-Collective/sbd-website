@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:#fff}
+  *{box-sizing:border-box}
+  @keyframes sbdFade{from{opacity:0}to{opacity:1}}
+</style>
+</helmet>
+
+<div style="font-family:'Public Sans',sans-serif;color:#333;background:#fff">
+  <dc-import name="SiteHeader" active="" hint-size="100%,76px"></dc-import>
+
+  <section style="background:linear-gradient(180deg,#F8FAFB 0%,#fff 100%);border-bottom:1px solid #E4E8EC">
+    <div style="max-width:820px;margin:0 auto;padding:72px 32px 48px">
+      <div style="display:inline-flex;align-items:center;gap:10px;font-family:'Libre Franklin',sans-serif;font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#1E6FBF"><span style="width:24px;height:1.5px;background:#1E6FBF"></span>Legal</div>
+      <h1 style="font-family:'Libre Franklin',sans-serif;font-weight:800;font-size:clamp(32px,4.2vw,46px);line-height:1.08;letter-spacing:-0.025em;color:#1E3A5F;margin:18px 0 0">Terms of Service</h1>
+      <p style="font-size:16px;line-height:1.6;color:#7E8893;margin:14px 0 0">The terms that govern your use of the Strategies By Design website.</p>
+    </div>
+  </section>
+
+  <section style="max-width:820px;margin:0 auto;padding:56px 32px 88px">
+    <sc-for list="{{ sections }}" as="s" hint-placeholder-count="9">
+      <div style="margin-bottom:38px">
+        <h2 style="font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:21px;letter-spacing:-0.01em;color:#1E3A5F;margin:0 0 12px;padding-left:16px;border-left:3px solid #1E6FBF">{{ s.title }}</h2>
+        <p style="font-size:16.5px;line-height:1.74;color:#5A6470;margin:0">{{ s.body }}</p>
+      </div>
+    </sc-for>
+    <div style="margin-top:44px;background:#F2F4F6;border:1px solid #E4E8EC;border-radius:14px;padding:26px 28px">
+      <div style="font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:16px;color:#1E3A5F;margin-bottom:6px">Questions about these terms?</div>
+      <p style="font-size:15.5px;line-height:1.6;color:#5A6470;margin:0">Contact us at <a href="mailto:engage@strategiesbydesigngroup.com" style="color:#1E6FBF;text-decoration:none;font-weight:600">engage@strategiesbydesigngroup.com</a>.</p>
+    </div>
+  </section>
+
+  <dc-import name="SiteFooter" hint-size="100%,360px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      sections: [
+        { title:'Acceptance of Terms', body:'By accessing or using this website, you agree to be bound by these Terms of Service.' },
+        { title:'Data Privacy', body:'We respect your privacy and are committed to handling personal information in accordance with our Privacy Policy. By using our website, you acknowledge that you have reviewed our Privacy Policy and understand how your information may be collected and used.' },
+        { title:'Service Agreement', body:'Use of this website does not by itself create a client or service relationship. Any consulting services provided by our company will be governed by a separate agreement setting forth the scope of services, fees, and applicable terms.' },
+        { title:'Intellectual Property', body:'All content on this website, including text, graphics, logos, branding, and other materials, is the property of Strategies By Design or its licensors and is protected by applicable copyright, trademark, and other intellectual property laws. You may not reproduce, distribute, modify, or use website content without prior written permission.' },
+        { title:'Payment Terms', body:'Any fees, invoices, and payment obligations related to our services should be understood through our agreement. Website access alone does not create any payment obligation unless specifically stated.' },
+        { title:'User Responsibilities', body:'By using this website, you agree to use it only for lawful purposes and in a manner that does not violate the rights of others, interfere with website operations, or attempt unauthorized access to any part of the site or its systems.' },
+        { title:'Third-Party Links', body:'This website may contain links to third-party websites or services for your convenience. We are not responsible for the content, availability, accuracy, or privacy practices of any third-party websites. Access to such websites is at your own risk.' },
+        { title:'Disclaimer', body:'The information provided on this website is for general informational purposes only and does not constitute legal, financial, tax, business, or other professional advice. While we make reasonable efforts to keep information accurate and up to date, we make no warranties regarding completeness, accuracy, or reliability. This website is provided on an "as is" and "as available" basis, without warranties of any kind, express or implied, to the fullest extent permitted by law.' },
+        { title:'Governing Law', body:'Any disputes arising from or relating to the usage of our services shall be governed by the laws of the state of Michigan, ensuring fair resolution, unless otherwise required by law.' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

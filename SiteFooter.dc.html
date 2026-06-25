@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<footer style="font-family:'Public Sans',sans-serif;background:#13263F;color:#fff">
+  <style>
+    @media (max-width:780px){
+      .sbd-foot-grid{grid-template-columns:1fr 1fr !important;gap:32px !important;padding-left:24px !important;padding-right:24px !important}
+      .sbd-foot-brand{grid-column:1 / -1 !important}
+    }
+    @media (max-width:480px){
+      .sbd-foot-grid{grid-template-columns:1fr !important}
+    }
+  </style>
+  <div class="sbd-foot-grid" style="max-width:1200px;margin:0 auto;padding:62px 32px 36px;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px">
+    <div class="sbd-foot-brand" style="max-width:300px">
+      <img src="assets/logo-full-transparent.png" alt="Strategies by Design" style="height:46px;width:auto;display:block">
+      <p style="font-size:14.5px;line-height:1.65;color:#93A7BF;margin:20px 0 0">A transformation studio blending human insight, design strategy, and technical expertise — turning AI into a driver of real, people-first growth.</p>
+      <div style="margin-top:20px;font-family:'Libre Franklin',sans-serif;font-weight:600;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#5C7596">Innovate · Create · Execute</div>
+    </div>
+
+    <div>
+      <div style="font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:#C9D4E1;margin-bottom:16px">Explore</div>
+      <div style="display:flex;flex-direction:column;gap:2px">
+        <a href="Home.dc.html" style="color:#93A7BF;font-size:14.5px;text-decoration:none;padding:6px 0" style-hover="color:#fff">Home</a>
+        <a href="About.dc.html" style="color:#93A7BF;font-size:14.5px;text-decoration:none;padding:6px 0" style-hover="color:#fff">About Us</a>
+        <a href="Organizational-Readiness.dc.html" style="color:#93A7BF;font-size:14.5px;text-decoration:none;padding:6px 0" style-hover="color:#fff">Organizational Readiness</a>
+        <a href="Certifications.dc.html" style="color:#93A7BF;font-size:14.5px;text-decoration:none;padding:6px 0" style-hover="color:#fff">AI Certifications</a>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:#C9D4E1;margin-bottom:16px">Company</div>
+      <div style="display:flex;flex-direction:column;gap:2px">
+        <a href="Partners.dc.html" style="color:#93A7BF;font-size:14.5px;text-decoration:none;padding:6px 0" style-hover="color:#fff">Our Partners</a>
+        <a href="Kind-Words.dc.html" style="color:#93A7BF;font-size:14.5px;text-decoration:none;padding:6px 0" style-hover="color:#fff">Kind Words</a>
+        <a href="Privacy-Policy.dc.html" style="color:#93A7BF;font-size:14.5px;text-decoration:none;padding:6px 0" style-hover="color:#fff">Privacy Policy</a>
+        <a href="Terms-of-Service.dc.html" style="color:#93A7BF;font-size:14.5px;text-decoration:none;padding:6px 0" style-hover="color:#fff">Terms of Service</a>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:#C9D4E1;margin-bottom:16px">Connect</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <a href="https://www.linkedin.com/company/strategiesbydesign-group/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:9px;color:#93A7BF;font-size:14.5px;text-decoration:none" style-hover="color:#fff">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg>
+          LinkedIn
+        </a>
+        <a href="mailto:engage@strategiesbydesigngroup.com" style="display:inline-flex;align-items:center;gap:9px;color:#93A7BF;font-size:14.5px;text-decoration:none" style-hover="color:#fff">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 5L2 7"></path></svg>
+          Email us
+        </a>
+        <button onClick="{{ openContact }}" style="margin-top:6px;align-self:flex-start;display:inline-flex;align-items:center;gap:8px;font-family:'Libre Franklin',sans-serif;font-weight:600;font-size:14px;color:#fff;background:transparent;border:1px solid #36567B;border-radius:10px;padding:10px 16px;cursor:pointer;transition:background .2s,border-color .2s" style-hover="background:#18304F;border-color:#5C7596">Contact us</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="border-top:1px solid #1E3A5F">
+    <div style="max-width:1200px;margin:0 auto;padding:20px 32px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;color:#5C7596;font-size:13px">
+      <span>© Copyright 2026, All Rights Reserved by Strategies By Design.</span>
+      <span style="display:flex;gap:20px">
+        <a href="Privacy-Policy.dc.html" style="color:#5C7596;text-decoration:none" style-hover="color:#93A7BF">Privacy Policy</a>
+        <a href="Terms-of-Service.dc.html" style="color:#5C7596;text-decoration:none" style-hover="color:#93A7BF">Terms of Service</a>
+      </span>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:360}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      openContact: () => window.dispatchEvent(new CustomEvent('sbd:open-contact')),
+    };
+  }
+}
+</script>
+</body>
+</html>

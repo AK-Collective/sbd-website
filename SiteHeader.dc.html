@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+</helmet>
+
+<div style="font-family:'Public Sans',sans-serif">
+  <header style="{{ headerBarStyle }}">
+    <div style="max-width:1200px;margin:0 auto;padding:0 32px;height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+      <a href="Home.dc.html" style="display:flex;align-items:center;flex:none;text-decoration:none">
+        <img src="assets/logo-full-transparent.png" alt="Strategies by Design" style="{{ logoStyle }}">
+      </a>
+
+      <nav style="display:flex;align-items:center;gap:30px" data-role="desktop-nav">
+        <sc-for list="{{ links }}" as="link" hint-placeholder-count="5">
+          <a href="{{ link.href }}" style="{{ navLinkStyle }}" style-hover="{{ navLinkHover }}">
+            {{ link.label }}
+            <sc-if value="{{ link.active }}" hint-placeholder-val="{{ false }}">
+              <span style="{{ activeBarStyle }}"></span>
+            </sc-if>
+          </a>
+        </sc-for>
+        <button onClick="{{ openContact }}" style="{{ ctaStyle }}" style-hover="{{ ctaHover }}" style-active="transform:translateY(1px)">
+          Start a conversation
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+      </nav>
+
+      <button onClick="{{ toggleMobile }}" data-role="burger" style="{{ burgerStyle }}">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </div>
+
+    <sc-if value="{{ mobileOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="{{ mobilePanelStyle }}">
+        <div style="display:flex;flex-direction:column;gap:4px;max-width:1200px;margin:0 auto">
+          <sc-for list="{{ links }}" as="link" hint-placeholder-count="5">
+            <a href="{{ link.href }}" style="{{ mobileLinkStyle }}">{{ link.label }}</a>
+          </sc-for>
+          <button onClick="{{ openContact }}" style="{{ ctaMobileStyle }}">Start a conversation</button>
+        </div>
+      </div>
+    </sc-if>
+  </header>
+
+  <sc-if value="{{ open }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeContact }}" style="position:fixed;inset:0;z-index:80;background:rgba(30,58,95,0.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:24px;animation:sbdFade .18s ease">
+      <div onClick="{{ stop }}" style="width:100%;max-width:540px;max-height:90vh;overflow:auto;background:#fff;border-radius:20px;box-shadow:0 24px 60px rgba(30,58,95,0.30);padding:38px 40px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+          <div>
+            <div style="display:inline-flex;align-items:center;gap:8px;font-family:'Libre Franklin',sans-serif;font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#1E6FBF">
+              <span style="width:18px;height:1px;background:#1E6FBF"></span>Let's talk
+            </div>
+            <h2 style="font-family:'Libre Franklin',sans-serif;font-weight:800;font-size:26px;letter-spacing:-0.02em;color:#1E3A5F;margin:12px 0 0">Start a strategy conversation</h2>
+          </div>
+          <button onClick="{{ closeContact }}" aria-label="Close" style="flex:none;width:38px;height:38px;border-radius:10px;border:1px solid #E4E8EC;background:#fff;color:#5A6470;font-size:20px;line-height:1;cursor:pointer" style-hover="background:#F2F4F6">×</button>
+        </div>
+
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:34px 4px 8px;text-align:center">
+            <div style="width:64px;height:64px;border-radius:50%;margin:0 auto;display:flex;align-items:center;justify-content:center;background:#ECF7E9;color:#339024">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <h3 style="font-family:'Libre Franklin',sans-serif;font-weight:800;font-size:22px;color:#1E3A5F;margin:20px 0 8px">Thank you — message received.</h3>
+            <p style="font-family:'Public Sans',sans-serif;font-size:15px;line-height:1.6;color:#5A6470;margin:0 auto;max-width:380px">We'll respond with insight tailored to your context. Talk soon.</p>
+            <button onClick="{{ closeContact }}" style="margin-top:24px;font-family:'Libre Franklin',sans-serif;font-weight:600;font-size:15px;color:#fff;background:#1E3A5F;border:none;border-radius:10px;padding:12px 26px;cursor:pointer">Close</button>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ showForm }}" hint-placeholder-val="{{ true }}">
+          <p style="font-family:'Public Sans',sans-serif;font-size:15px;line-height:1.6;color:#5A6470;margin:14px 0 22px">Tell us what you're hoping AI can help you achieve — we'll reply with a practical next step, no pressure.</p>
+          <form onSubmit="{{ submit }}">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+              <label style="display:block">
+                <span style="display:block;font-family:'Libre Franklin',sans-serif;font-weight:600;font-size:13px;color:#1E3A5F;margin-bottom:6px">Name</span>
+                <input value="{{ name }}" onChange="{{ onName }}" required placeholder="Your name" style="width:100%;box-sizing:border-box;font-family:'Public Sans',sans-serif;font-size:15px;color:#333;padding:11px 13px;border:1px solid #D2D8DE;border-radius:10px;outline:none;transition:border-color .2s,box-shadow .2s" style-focus="border-color:#1E6FBF;box-shadow:0 0 0 3px rgba(30,111,191,0.20)">
+              </label>
+              <label style="display:block">
+                <span style="display:block;font-family:'Libre Franklin',sans-serif;font-weight:600;font-size:13px;color:#1E3A5F;margin-bottom:6px">Organization</span>
+                <input value="{{ org }}" onChange="{{ onOrg }}" placeholder="Company" style="width:100%;box-sizing:border-box;font-family:'Public Sans',sans-serif;font-size:15px;color:#333;padding:11px 13px;border:1px solid #D2D8DE;border-radius:10px;outline:none;transition:border-color .2s,box-shadow .2s" style-focus="border-color:#1E6FBF;box-shadow:0 0 0 3px rgba(30,111,191,0.20)">
+              </label>
+              <label style="display:block">
+                <span style="display:block;font-family:'Libre Franklin',sans-serif;font-weight:600;font-size:13px;color:#1E3A5F;margin-bottom:6px">Role</span>
+                <input value="{{ role }}" onChange="{{ onRole }}" placeholder="Your title" style="width:100%;box-sizing:border-box;font-family:'Public Sans',sans-serif;font-size:15px;color:#333;padding:11px 13px;border:1px solid #D2D8DE;border-radius:10px;outline:none;transition:border-color .2s,box-shadow .2s" style-focus="border-color:#1E6FBF;box-shadow:0 0 0 3px rgba(30,111,191,0.20)">
+              </label>
+              <label style="display:block">
+                <span style="display:block;font-family:'Libre Franklin',sans-serif;font-weight:600;font-size:13px;color:#1E3A5F;margin-bottom:6px">Email</span>
+                <input value="{{ email }}" onChange="{{ onEmail }}" type="email" required placeholder="you@company.com" style="width:100%;box-sizing:border-box;font-family:'Public Sans',sans-serif;font-size:15px;color:#333;padding:11px 13px;border:1px solid #D2D8DE;border-radius:10px;outline:none;transition:border-color .2s,box-shadow .2s" style-focus="border-color:#1E6FBF;box-shadow:0 0 0 3px rgba(30,111,191,0.20)">
+              </label>
+            </div>
+            <label style="display:block;margin-top:14px">
+              <span style="display:block;font-family:'Libre Franklin',sans-serif;font-weight:600;font-size:13px;color:#1E3A5F;margin-bottom:6px">What are you hoping AI can help you achieve?</span>
+              <textarea value="{{ message }}" onChange="{{ onMessage }}" rows="3" placeholder="Share your vision, challenge, or question…" style="width:100%;box-sizing:border-box;font-family:'Public Sans',sans-serif;font-size:15px;color:#333;line-height:1.55;padding:11px 13px;border:1px solid #D2D8DE;border-radius:10px;outline:none;resize:vertical;transition:border-color .2s,box-shadow .2s" style-focus="border-color:#1E6FBF;box-shadow:0 0 0 3px rgba(30,111,191,0.20)"></textarea>
+            </label>
+            <button type="submit" style="margin-top:20px;width:100%;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:16px;color:#fff;background:linear-gradient(135deg,#1E6FBF,#3DAE2B);border:none;border-radius:12px;padding:14px 24px;cursor:pointer;box-shadow:0 8px 20px rgba(30,111,191,0.22);transition:filter .2s,transform .12s" style-hover="filter:brightness(.96)" style-active="transform:translateY(1px)">
+              Send message
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+            <p style="font-family:'Public Sans',sans-serif;font-size:12.5px;color:#7E8893;text-align:center;margin:14px 0 0">Or email us at <a href="mailto:engage@strategiesbydesigngroup.com" style="color:#1E6FBF;text-decoration:none;font-weight:600">engage@strategiesbydesigngroup.com</a></p>
+          </form>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:80},&quot;active&quot;:{&quot;editor&quot;:null,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;surface&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;glass&quot;,&quot;options&quot;:[&quot;glass&quot;,&quot;solid&quot;,&quot;navy&quot;],&quot;tsType&quot;:&quot;'glass'|'solid'|'navy'&quot;},&quot;ctaStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;solid&quot;,&quot;options&quot;:[&quot;solid&quot;,&quot;gradient&quot;,&quot;outline&quot;],&quot;tsType&quot;:&quot;'solid'|'gradient'|'outline'&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;blue&quot;,&quot;options&quot;:[&quot;blue&quot;,&quot;green&quot;,&quot;gold&quot;,&quot;teal&quot;],&quot;tsType&quot;:&quot;'blue'|'green'|'gold'|'teal'&quot;}}">
+class Component extends DCLogic {
+  state = { open:false, sent:false, mobileOpen:false, name:'', org:'', role:'', email:'', message:'' };
+
+  componentDidMount() {
+    this._open = () => this.setState({ open:true, sent:false });
+    window.addEventListener('sbd:open-contact', this._open);
+    this._key = (e) => { if (e.key === 'Escape') this.setState({ open:false }); };
+    window.addEventListener('keydown', this._key);
+    this._fit = () => {
+      const root = this._root;
+      if (!root) return;
+      const narrow = window.innerWidth < 900;
+      const nav = root.querySelector('[data-role="desktop-nav"]');
+      const burger = root.querySelector('[data-role="burger"]');
+      if (nav) nav.style.display = narrow ? 'none' : 'flex';
+      if (burger) burger.style.display = narrow ? 'inline-flex' : 'none';
+      if (!narrow && this.state.mobileOpen) this.setState({ mobileOpen:false });
+    };
+    // root is the wrapper div rendered by the template
+    this._root = (typeof this.el !== 'undefined' && this.el) ? this.el : document;
+    this._fit();
+    window.addEventListener('resize', this._fit);
+    // run again after layout settles
+    setTimeout(this._fit, 60);
+  }
+  componentDidUpdate() { if (this._fit) this._fit(); }
+  componentWillUnmount() {
+    window.removeEventListener('sbd:open-contact', this._open);
+    window.removeEventListener('keydown', this._key);
+    window.removeEventListener('resize', this._fit);
+  }
+
+  renderVals() {
+    const active = this.props.active || '';
+    const links = [
+      { label:'About', href:'About.dc.html', key:'about' },
+      { label:'Readiness', href:'Organizational-Readiness.dc.html', key:'readiness' },
+      { label:'Certifications', href:'Certifications.dc.html', key:'certifications' },
+      { label:'Partners', href:'Partners.dc.html', key:'partners' },
+      { label:'Kind Words', href:'Kind-Words.dc.html', key:'kindwords' },
+    ].map(l => ({ ...l, active: l.key === active }));
+
+    const ACC = {
+      blue:{solid:'#1E6FBF',grad:'linear-gradient(135deg,#1E6FBF,#3DAE2B)',tint:'rgba(30,111,191,0.10)'},
+      green:{solid:'#3DAE2B',grad:'linear-gradient(135deg,#3DAE2B,#1E6FBF)',tint:'rgba(61,174,43,0.12)'},
+      gold:{solid:'#C8A951',grad:'linear-gradient(135deg,#C8A951,#3DAE2B)',tint:'rgba(200,169,81,0.14)'},
+      teal:{solid:'#00B4D8',grad:'linear-gradient(135deg,#00B4D8,#1E6FBF)',tint:'rgba(0,180,216,0.12)'},
+    };
+    const acc = ACC[this.props.accent] || ACC.blue;
+    const surface = this.props.surface || 'glass';
+    const navy = surface === 'navy';
+    const btnBase = { display:'inline-flex', alignItems:'center', gap:'9px', fontFamily:"'Libre Franklin',sans-serif", fontWeight:600, fontSize:'15px', borderRadius:'10px', padding:'11px 20px', cursor:'pointer', transition:'filter .2s,box-shadow .2s,transform .12s,background .2s' };
+    const headerBarStyle = {
+      position:'sticky', top:0, zIndex:60,
+      background: navy ? 'linear-gradient(160deg,#1E3A5F,#13263F)' : (surface==='solid' ? '#ffffff' : 'rgba(255,255,255,0.88)'),
+      backdropFilter: surface==='glass' ? 'blur(10px)' : 'none',
+      WebkitBackdropFilter: surface==='glass' ? 'blur(10px)' : 'none',
+      borderBottom: navy ? '1px solid #2C4A6E' : '1px solid #E4E8EC',
+      boxShadow: surface==='solid' ? '0 1px 3px rgba(30,58,95,0.08)' : 'none',
+    };
+    const linkColor = navy ? '#E8EDF2' : '#1E3A5F';
+    const navLinkStyle = { position:'relative', fontFamily:"'Libre Franklin',sans-serif", fontWeight:600, fontSize:'15px', color:linkColor, textDecoration:'none', padding:'6px 0', whiteSpace:'nowrap', transition:'color .2s' };
+    const navLinkHover = { color: navy ? '#ffffff' : '#154A80' };
+    const activeBarStyle = { position:'absolute', left:0, right:0, bottom:'-2px', height:'2px', borderRadius:'2px', background: acc.grad };
+    const logoStyle = { height:'40px', width:'auto', display:'block', filter: navy ? 'brightness(0) invert(1)' : 'none' };
+    const cs = this.props.ctaStyle || 'solid';
+    let ctaStyle, ctaHover;
+    if (cs === 'gradient') {
+      ctaStyle = { ...btnBase, color:'#fff', background:acc.grad, border:'none', boxShadow:'0 6px 16px rgba(30,58,95,0.18)' };
+      ctaHover = { filter:'brightness(.96)', boxShadow:'0 9px 22px rgba(30,58,95,0.24)' };
+    } else if (cs === 'outline') {
+      ctaStyle = { ...btnBase, color: navy?'#fff':acc.solid, background:'transparent', border:'1.5px solid '+(navy?'rgba(255,255,255,0.55)':acc.solid), boxShadow:'none' };
+      ctaHover = { background: navy?'rgba(255,255,255,0.12)':acc.tint };
+    } else {
+      ctaStyle = { ...btnBase, color:'#fff', background:acc.solid, border:'none', boxShadow:'0 1px 2px rgba(30,58,95,0.12)' };
+      ctaHover = { filter:'brightness(.94)', boxShadow:'0 6px 16px rgba(30,58,95,0.18)' };
+    }
+    const ctaMobileStyle = { ...ctaStyle, marginTop:'14px', justifyContent:'center', padding:'13px 20px' };
+    const burgerStyle = { display:'none', alignItems:'center', justifyContent:'center', width:'44px', height:'44px', border:'1px solid '+(navy?'#36567B':'#E4E8EC'), borderRadius:'10px', background: navy?'transparent':'#fff', color:linkColor, cursor:'pointer' };
+    const mobilePanelStyle = { borderTop:'1px solid '+(navy?'#2C4A6E':'#E4E8EC'), background: navy?'#18304F':'#fff', padding:'14px 32px 22px' };
+    const mobileLinkStyle = { fontFamily:"'Libre Franklin',sans-serif", fontWeight:600, fontSize:'16px', color:linkColor, textDecoration:'none', padding:'12px 0', borderBottom:'1px solid '+(navy?'#2C4A6E':'#F2F4F6') };
+
+    return {
+      links,
+      headerBarStyle, navLinkStyle, navLinkHover, activeBarStyle, logoStyle, ctaStyle, ctaHover, ctaMobileStyle, burgerStyle, mobilePanelStyle, mobileLinkStyle,
+      open: this.state.open,
+      sent: this.state.sent,
+      showForm: !this.state.sent,
+      mobileOpen: this.state.mobileOpen,
+      name: this.state.name, org: this.state.org, role: this.state.role, email: this.state.email, message: this.state.message,
+      openContact: () => this.setState({ open:true, sent:false, mobileOpen:false }),
+      closeContact: () => this.setState({ open:false }),
+      toggleMobile: () => this.setState(s => ({ mobileOpen: !s.mobileOpen })),
+      stop: (e) => e.stopPropagation(),
+      onName: (e) => this.setState({ name:e.target.value }),
+      onOrg: (e) => this.setState({ org:e.target.value }),
+      onRole: (e) => this.setState({ role:e.target.value }),
+      onEmail: (e) => this.setState({ email:e.target.value }),
+      onMessage: (e) => this.setState({ message:e.target.value }),
+      submit: (e) => { e.preventDefault(); this.setState({ sent:true }); },
+    };
+  }
+}
+</script>
+</body>
+</html>
