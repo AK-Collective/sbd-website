@@ -110,6 +110,19 @@
 
   run();
 
+  // Backstop: reveal everything still hidden. Scroll-reveal must never leave
+  // content invisible — on tall mobile pages (or any non-scrolling view like a
+  // preview/screenshot, or if IntersectionObserver doesn't fire) the below-fold
+  // sections would otherwise stay blank. This guarantees visibility regardless.
+  function revealAll() {
+    document.querySelectorAll('.sbd-reveal:not(.sbd-in)').forEach((el) => el.classList.add('sbd-in'));
+  }
+  // Reveal-all the moment the user scrolls at all (snappy + robust)...
+  window.addEventListener('scroll', revealAll, { passive: true, once: true });
+  // ...and on an absolute timer so it fires even if `load` already happened or
+  // the page is never scrolled. The on-load above-fold stagger still plays.
+  setTimeout(revealAll, 1100);
+
   // support.js renders the page asynchronously and fetches the header/footer;
   // re-scan as nodes arrive, then stop watching once things settle.
   const mo = new MutationObserver(run);
@@ -117,14 +130,7 @@
 
   window.addEventListener('load', () => {
     run();
-    // Failsafe: never leave an above-the-fold block stuck hidden.
-    setTimeout(() => {
-      document.querySelectorAll('.sbd-reveal:not(.sbd-in)').forEach((el) => {
-        if (el.getBoundingClientRect().top < window.innerHeight) {
-          el.classList.add('sbd-in');
-        }
-      });
-    }, 500);
+    setTimeout(revealAll, 1100);
     setTimeout(() => mo.disconnect(), 4000);
   });
 })();
