@@ -77,7 +77,7 @@
 
   function floatSphere() {
     if (reduce) return;
-    document.querySelectorAll('img[alt*="sphere" i]').forEach((img) => {
+    document.querySelectorAll('img[src*="logo-mark"]').forEach((img) => {
       img.classList.add('sbd-float');
     });
   }
